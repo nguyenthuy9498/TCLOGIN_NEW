@@ -58,6 +58,20 @@ public class Logintest {
         WebElement errorlabel = driver.findElement(By.xpath("//div[@class='login-box']//h3"));
         Assert.assertEquals("Epic sadface: Password is required",errorlabel.getText());
     }
+    //username khong trim dau
+    @Test
+    public void TC7(){
+        Login("    standard_user","secret_sauce");
+        WebElement errorlabel = driver.findElement(By.xpath("//div[@class='login-box']//h3"));
+        Assert.assertEquals("Epic sadface: Username and password do not match any user in this service",errorlabel.getText());
+    }
+    //username khong trim cuoi
+    @Test
+    public void TC8(){
+        Login("standard_user    ","secret_sauce");
+        WebElement errorlabel = driver.findElement(By.xpath("//div[@class='login-box']//h3"));
+        Assert.assertEquals("Epic sadface: Username and password do not match any user in this service",errorlabel.getText());
+    }
     @After
     public void teardown(){
         driver.quit();
